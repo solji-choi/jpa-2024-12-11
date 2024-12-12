@@ -6,6 +6,8 @@ import com.ll.jpa.domain.post.postComment.repository.PostCommentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class PostCommentService {
@@ -18,5 +20,9 @@ public class PostCommentService {
                 .build();
 
         return postCommentRepository.save(postcomment);
+    }
+
+    public Optional<PostComment> findById(long id) {
+        return postCommentRepository.findById(id);
     }
 }

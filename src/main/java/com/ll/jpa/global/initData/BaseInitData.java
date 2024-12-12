@@ -9,6 +9,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.transaction.annotation.Transactional;
 
 @Configuration
@@ -18,6 +19,7 @@ public class BaseInitData {
     private final PostCommentService postCommentService;
 
     @Bean
+    @Order(1)
     public ApplicationRunner baseInitData1ApplicationRunner() {
         return new ApplicationRunner() {
             @Transactional
@@ -32,6 +34,19 @@ public class BaseInitData {
                 PostComment postComment1 = postCommentService.write(post1, "comment1");
                 PostComment postComment2 = postCommentService.write(post1, "comment2");
                 PostComment postComment3 = postCommentService.write(post2, "comment3");
+            }
+        };
+    }
+
+    @Bean
+    @Order(2)
+    public ApplicationRunner baseInitData2ApplicationRunner() {
+        return new ApplicationRunner() {
+            @Transactional
+            @Override
+            public void run(ApplicationArguments args) throws Exception {
+                PostComment postComment3 = postCommentService.findById(3).get();
+                Post postOfComment3 = postComment3.getPost();
             }
         };
     }

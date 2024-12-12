@@ -22,7 +22,6 @@ public class BaseInitData {
     @Order(1)
     public ApplicationRunner baseInitData1ApplicationRunner() {
         return new ApplicationRunner() {
-            @Transactional
             @Override
             public void run(ApplicationArguments args) throws Exception {
                 if (postService.count() > 0) return;
@@ -46,7 +45,11 @@ public class BaseInitData {
             @Override
             public void run(ApplicationArguments args) throws Exception {
                 PostComment postComment3 = postCommentService.findById(3).get();
+
                 Post postOfComment3 = postComment3.getPost();
+                System.out.println("postOfComment3.id = " + postOfComment3.getId());
+                System.out.println("postOfComment3.title = " + postOfComment3.getTitle());
+                System.out.println("postOfComment3.content = " + postOfComment3.getContent());
             }
         };
     }

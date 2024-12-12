@@ -42,4 +42,14 @@ public class BaseInitData {
             }
         };
     }
+
+    @Bean
+    @Order(3)
+    public ApplicationRunner baseInitData3ApplicationRunner() {
+        return args -> {
+            Post post4 = postService.write("title4", "content4");
+
+            postService.delete(post4);
+        };
+    }
 }

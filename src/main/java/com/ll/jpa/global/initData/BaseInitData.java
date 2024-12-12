@@ -5,10 +5,12 @@ import com.ll.jpa.domain.post.post.service.PostService;
 import com.ll.jpa.domain.post.postComment.entity.PostComment;
 import com.ll.jpa.domain.post.postComment.service.PostCommentService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.core.annotation.Order;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +19,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class BaseInitData {
     private final PostService postService;
     private final PostCommentService postCommentService;
+    @Autowired
+    @Lazy
+    private BaseInitData self;
 
     @Bean
     @Order(1)
@@ -40,17 +45,16 @@ public class BaseInitData {
     @Bean
     @Order(2)
     public ApplicationRunner baseInitData2ApplicationRunner() {
-        return new ApplicationRunner() {
-            @Transactional
-            @Override
-            public void run(ApplicationArguments args) throws Exception {
-                PostComment postComment3 = postCommentService.findById(3).get();
+        return args -> self.work();
+    }
 
-                Post postOfComment3 = postComment3.getPost();
-                System.out.println("postOfComment3.id = " + postOfComment3.getId());
-                System.out.println("postOfComment3.title = " + postOfComment3.getTitle());
-                System.out.println("postOfComment3.content = " + postOfComment3.getContent());
-            }
-        };
+    @Transactional
+    public void work() {
+        PostComment postComment3 = postCommentService.findById(3).get();
+
+        Post postOfComment3 = postComment3.getPost();
+        System.out.println("postOfComment3.id = " + postOfComment3.getId());
+        System.out.println("postOfComment3.title = " + postOfComment3.getTitle());
+        System.out.println("postOfComment3.content = " + postOfComment3.getContent());
     }
 }

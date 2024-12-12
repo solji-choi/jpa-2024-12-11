@@ -2,6 +2,8 @@ package com.ll.jpa.global.initData;
 
 import com.ll.jpa.domain.post.post.entity.Post;
 import com.ll.jpa.domain.post.post.service.PostService;
+import com.ll.jpa.domain.post.postComment.entity.PostComment;
+import com.ll.jpa.domain.post.postComment.service.PostCommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -13,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class BaseInitData {
     private final PostService postService;
+    private final PostCommentService postCommentService;
 
     @Bean
     public ApplicationRunner baseInitData1ApplicationRunner() {
@@ -25,6 +28,10 @@ public class BaseInitData {
                 Post post1 = postService.write("title1", "content1");
                 Post post2 = postService.write("title2", "content2");
                 Post post3 = postService.write("title3", "content3");
+
+                PostComment postComment1 = postCommentService.write(post1.getId(), "comment1");
+                PostComment postComment2 = postCommentService.write(post1.getId(), "comment2");
+                PostComment postComment3 = postCommentService.write(post2.getId(), "comment3");
             }
         };
     }

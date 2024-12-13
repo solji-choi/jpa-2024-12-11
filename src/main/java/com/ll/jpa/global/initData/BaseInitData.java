@@ -13,8 +13,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Slf4j
 @Configuration
 @RequiredArgsConstructor
@@ -57,28 +55,19 @@ public class BaseInitData {
 
     @Transactional
     public void work2() {
-        Post post = postService.findById(1).get();
-        System.out.println("1번글 로드 완료");
+        Post post1 = postService.findById(1).get();
+        post1.setContent("content1-" + Math.random() * 100);
 
-        List<PostComment> postComments = post.getComments();
-        System.out.println("1번글의 댓들들 로드 완료");
-        
-        PostComment postComment1 = postComments.get(0);
-        System.out.println("1번글의 첫번째 댓글 로드 완료");
+        PostComment postComment1 = post1.getComments().get(0);
+        postComment1.setContent("content1-" + Math.random() * 100);
 
-        PostComment postComment2 = postComments.get(1);
-        System.out.println("1번글의 두번째 댓글 로드 완료");
+        PostComment postComment2 = post1.getComments().get(1);
+        postComment2.setContent("content1-" + Math.random() * 100);
 
     }
 
     @Transactional
     public void work3() {
-        Post post1 = postService.findById(1).get();
 
-        post1.getComments().size();
-
-        post1.addComment("comment4"); // 이런경우에도 PERSIST 에 의해서 댓글이 등록됩니다.
-
-        System.out.println( post1.getComments().get(2).getContent());
     }
 }

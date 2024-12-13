@@ -73,6 +73,12 @@ public class BaseInitData {
 
     @Transactional
     public void work3() {
+        Post post1 = postService.findById(1).get();
 
+        post1.getComments().size();
+
+        post1.addComment("comment4"); // 이런경우에도 PERSIST 에 의해서 댓글이 등록됩니다.
+
+        System.out.println( post1.getComments().get(2).getContent());
     }
 }

@@ -45,7 +45,7 @@ public class Post {
     private boolean blind;
 
     @Builder.Default
-    @OneToMany(mappedBy = "post", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @OneToMany(mappedBy = "post", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
     private List<PostComment> comments = new ArrayList<>();
 
     public void addComment(String content) {
@@ -56,5 +56,9 @@ public class Post {
                 .build();
 
         comments.add(postComment);
+    }
+
+    public boolean removeComment(PostComment postComment) {
+        return comments.remove(postComment);
     }
 }

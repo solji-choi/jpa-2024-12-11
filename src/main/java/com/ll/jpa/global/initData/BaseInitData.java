@@ -55,9 +55,11 @@ public class BaseInitData {
     @Transactional
     public void work2() {
         Post post1 = postService.findById(1).get();
-        post1.setContent("content1-" + Math.random() * 100);
 
-        postService.delete(post1);
+        post1.getComments()
+                .removeIf(
+                        postComment -> postComment.getId() == 1
+                );
 
     }
 

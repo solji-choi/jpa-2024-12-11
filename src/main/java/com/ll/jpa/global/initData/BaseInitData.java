@@ -2,8 +2,10 @@ package com.ll.jpa.global.initData;
 
 import com.ll.jpa.domain.post.post.entity.Post;
 import com.ll.jpa.domain.post.post.service.PostService;
+import com.ll.jpa.domain.post.postComment.entity.PostComment;
 import com.ll.jpa.domain.post.postComment.service.PostCommentService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
@@ -11,6 +13,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 @Configuration
 @RequiredArgsConstructor
 public class BaseInitData {
@@ -52,6 +55,11 @@ public class BaseInitData {
 
     @Transactional
     public void work2() {
+        Post post1 = postService.findById(1).get();
+        post1.setContent("content1-" + Math.random() * 100);
+
+        PostComment firstCommentOfPost = post1.getComments().get(0);
+        firstCommentOfPost.setContent("comment1-" + Math.random() * 100);
 
     }
 

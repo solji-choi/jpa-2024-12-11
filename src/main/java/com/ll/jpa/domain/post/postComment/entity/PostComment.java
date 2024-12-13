@@ -16,12 +16,14 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Builder
 @EntityListeners(AuditingEntityListener.class)
 public class PostComment {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Setter(AccessLevel.PRIVATE)
+    @EqualsAndHashCode.Include
     private Long id;
 
     @CreatedDate

@@ -10,7 +10,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 
@@ -48,18 +47,6 @@ public class Post {
     @Builder.Default
     @OneToMany(mappedBy = "post", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
     private List<PostComment> comments = new ArrayList<>();
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        Post post = (Post) o;
-        return Objects.equals(id, post.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
-    }
 
     public void addComment(String content) {
         PostComment postComment = PostComment

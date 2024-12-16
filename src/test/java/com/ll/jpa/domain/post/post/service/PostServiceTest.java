@@ -206,7 +206,7 @@ class PostServiceTest {
     }
 
     @Test
-    @DisplayName("?")
+    @DisplayName("findByCommentsAuthorNickname")
     void t15() {
         List<Post> posts = postService.findByCommentsAuthorNickname("회원3");
 

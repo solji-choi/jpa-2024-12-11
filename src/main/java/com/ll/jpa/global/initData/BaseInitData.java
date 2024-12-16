@@ -48,13 +48,13 @@ public class BaseInitData {
     public void work2() {
         if (postService.count() > 0) return;
 
-        Member member1 = memberService.findByUsename("user1").get();
-        Member member2 = memberService.findByUsename("user2").get();
-        Member member3 = memberService.findByUsename("user3").get();
+        Member member1 = memberService.findByUsername("user1").get();
+        Member member2 = memberService.findByUsername("user2").get();
+        Member member3 = memberService.findByUsername("user3").get();
 
         Post post1 = postService.write(member1, "title1", "content1");
-        Post post2 = postService.write(member2, "title2", "content2");
-        Post post3 = postService.write(member3, "title3", "content3");
+        Post post2 = postService.write(member1, "title2", "content2");
+        Post post3 = postService.write(member2, "title3", "content3");
 
         post1.addComment(
                 member3,
@@ -67,7 +67,7 @@ public class BaseInitData {
         );
 
         post2.addComment(
-                member3,
+                member1,
                 "comment3"
         );
     }

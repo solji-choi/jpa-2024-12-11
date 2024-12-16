@@ -27,7 +27,7 @@ public class MemberService {
         return memberRepository.count();
     }
 
-    public Optional<Member> findByUsename (String username) {
+    public Optional<Member> findByUsername (String username) {
         return memberRepository.findByUsername(username);
     }
 }

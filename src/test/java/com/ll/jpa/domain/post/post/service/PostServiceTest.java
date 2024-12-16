@@ -204,4 +204,12 @@ class PostServiceTest {
 
         assertEquals(2, posts.size());
     }
+
+    @Test
+    @DisplayName("?")
+    void t15() {
+        List<Post> posts = postService.findByCommentsAuthorNickname("회원3");
+
+        assertEquals(1, posts.size());
+    }
 }

@@ -52,19 +52,22 @@ public class BaseInitData {
         Member member2 = memberService.findByUsename("user2").get();
         Member member3 = memberService.findByUsename("user3").get();
 
-        Post post1 = postService.write("title1", "content1");
-        Post post2 = postService.write("title2", "content2");
-        Post post3 = postService.write("title3", "content3");
+        Post post1 = postService.write(member1, "title1", "content1");
+        Post post2 = postService.write(member2, "title2", "content2");
+        Post post3 = postService.write(member3, "title3", "content3");
 
         post1.addComment(
+                member3,
                 "comment1"
         );
 
         post1.addComment(
+                member3,
                 "comment2"
         );
 
         post2.addComment(
+                member3,
                 "comment3"
         );
     }

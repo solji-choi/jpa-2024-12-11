@@ -1,5 +1,6 @@
 package com.ll.jpa.domain.post.postComment.entity;
 
+import com.ll.jpa.domain.member.member.emtity.Member;
 import com.ll.jpa.domain.post.post.entity.Post;
 import jakarta.persistence.*;
 import lombok.*;
@@ -33,6 +34,9 @@ public class PostComment {
     @LastModifiedDate
     @Setter(AccessLevel.PRIVATE)
     private LocalDateTime modifiedAt;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Member author;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Post post;

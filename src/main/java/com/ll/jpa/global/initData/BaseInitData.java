@@ -70,5 +70,14 @@ public class BaseInitData {
                 member1,
                 "comment3"
         );
+
+        post1.addTag("IT");
+        post1.addTag("Spring");
+        post1.addTag("JPA");
+
+        post2.addTag("소설");
+        post2.addTag("문학");
+        post2.addTag("소설가");
+
     }
 }
